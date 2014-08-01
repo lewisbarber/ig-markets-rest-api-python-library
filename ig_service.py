@@ -14,30 +14,26 @@ class IGService:
 	LOGGED_IN_HEADERS = None
 	DELETE_HEADERS = None
 
-	IG_API_KEY_LIVE = 'ENTER_API_KEY_HERE'
-	IG_API_KEY_DEMO = 'ENTER_API_KEY_HERE'
-
-	IG_USERNAME = 'ENTER_USERNAME_HERE'
-	IG_PASSWORD = 'ENTER_PASSWORD_HERE!'
-
-	IG_USERNAME_DEMO = 'ENTER_USERNAME_HERE'
-	IG_PASSWORD_DEMO = 'ENTER_PASSWORD_HERE'
-
 	BASE_URL = 'https://api.ig.com/gateway/deal'
 	BASE_URL_DEMO = 'https://demo-api.ig.com/gateway/deal'
 
 	API_KEY = None
+	IG_USERNAME = None
+	IG_PASSWORD = None
 
 	# Constructor, calls the method required to connect to the API (accepts acc_type = LIVE or DEMO)
-	def __init__(self, acc_type="LIVE"):
+	def __init__(self, username, password, api_key, acc_type="LIVE"):
+
+		self.API_KEY = api_key
+		self.IG_USERNAME = username
+		self.IG_PASSWORD = password
+
+		if acc_type != "DEMO" and acc_type != "LIVE":
+			print "Error: Invalid account type specified, please provide LIVE or DEMO."
+			return
 
 		if acc_type == "DEMO":
-			self.API_KEY = self.IG_API_KEY_DEMO
-			self.IG_USERNAME = self.IG_USERNAME_DEMO 
-			self.IG_PASSWORD = self.IG_PASSWORD_DEMO 
 			self.BASE_URL = self.BASE_URL_DEMO
-		else:
-			self.API_KEY = self.IG_API_KEY_LIVE
 
 		self.BASIC_HEADERS = { 
 			'X-IG-API-KEY': self.API_KEY,

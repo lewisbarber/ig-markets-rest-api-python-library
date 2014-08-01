@@ -14,12 +14,17 @@ Full details about the API or for information about how to open a CFD / Spread B
 
 Using this library to connect to the IG Markets API is extremely easy. All you need to do is import the IGService class, create an instance, and call the methods you wish to use. There is a method for each API endpoint exposed by their API. The code sample below shows you how to connect to the API, switch to a secondary account and retrieve all open positions for the active account.
 
-**Note:** The secure session with IG is established when you create an instance of the class. You will need to set your USERNAME, PASSWORD and API_KEY for IG at the top of the IGService class.
+**Note:** The secure session with IG is established when you create an instance of the class.
 
 ```python
 from ig_service import IGService
 
-ig_service = IGService()
+username = "YOUR_USERNAME"
+password = "YOUR_PASSWORD"
+api_key = "YOUR_API_KEY"
+acc_type = "LIVE" # LIVE / DEMO
+
+ig_service = IGService(username, password, api_key, acc_type)
 
 account_info = ig_service.switch_account('ABC123', False)
 
