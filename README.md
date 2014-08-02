@@ -5,7 +5,7 @@ A lightweight Python library that can be used to connect to the IG Markets REST 
 
 You can use the IG Markets HTTP / REST API to submit trade orders, open positions, close positions and view market sentiment. IG Markets provide Retail Spread Betting and CFD accounts for trading Equities, Forex, Commodities, Indices and much more.
 
-Full details about the API along with information about how to open an account with IG can be found at the following link:
+Full details about the API along with information about how to open an account with IG can be found at the link below:
 
 [http://labs.ig.com/](http://labs.ig.com/)
 
