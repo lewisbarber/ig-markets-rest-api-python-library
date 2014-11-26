@@ -304,12 +304,16 @@ class IGService:
         """Returns all markets matching the search term"""
         response = requests.get(self.BASE_URL + '/markets?searchTerm=%s' % search_term, headers=self.LOGGED_IN_HEADERS)
         data = self.parse_response(response.text)
+        if self.return_dataframe:
+            data = pd.DataFrame(data['markets'])
         return(data)
 
     def fetch_historical_prices_by_epic_and_date_range(self, epic, resolution, start_date, end_date):
         """Returns a list of historical prices for the given epic, resolution, multiplier and date range"""
         response = requests.get(self.BASE_URL + "/prices/{epic}/{resolution}/?startdate={start_date}&enddate={end_date}".format(epic=epic, resolution=resolution, start_date=start_date, end_date=end_date), headers=self.LOGGED_IN_HEADERS)
         data = self.parse_response(response.text)
+        if self.return_dataframe:
+            data['prices'] = pd.DataFrame(data['prices'])
         return(data)
 
     ############ END ############
