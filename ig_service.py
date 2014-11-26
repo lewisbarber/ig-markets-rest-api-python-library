@@ -389,11 +389,8 @@ class IGService:
         }
 
         response = requests.post(self.BASE_URL  + '/session', data=json.dumps(params), headers=self.BASIC_HEADERS)
-
-        data = self.parse_response(response.text)
-
         self._set_headers(response.headers, True)
-
+        data = self.parse_response(response.text)
         return(data)
 
     def switch_account(self, account_id, default_account):
@@ -404,10 +401,9 @@ class IGService:
         }
 
         response = requests.put(self.BASE_URL + '/session', data=json.dumps(params), headers=self.LOGGED_IN_HEADERS)
-
         self._set_headers(response.headers, False)
-
-        return self.parse_response(response.text)
+        data = self.parse_response(response.text)
+        return(data)
 
     ############ END ############
 
