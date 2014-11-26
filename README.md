@@ -18,19 +18,24 @@ Using this library to connect to the IG Markets API is extremely easy. All you n
 
 ```python
 from ig_service import IGService
+from ig_service_config import *
 
+ig_service = IGService(username, password, api_key, acc_type)
+ig_service.create_session()
+
+account_info = ig_service.switch_account('ABC123', False)
+print(account_info)
+
+open_positions = ig_service.fetch_open_positions()
+print(open_positions)
+```
+
+with ig_service_config.py
+
+```python
 username = "YOUR_USERNAME"
 password = "YOUR_PASSWORD"
 api_key = "YOUR_API_KEY"
-acc_type = "LIVE" # LIVE / DEMO
-
-ig_service = IGService(username, password, api_key, acc_type)
-
-account_info = ig_service.switch_account('ABC123', False)
-
-print account_info
-
-open_positions = ig_service.fetch_open_positions()
-
-print open_positions
+acc_type = "DEMO" # LIVE / DEMO
+acc_number = "ABC123"
 ```
