@@ -39,9 +39,10 @@ def test_ig_service():
     assert(isinstance(response, pd.DataFrame))
 
     response = ig_service.fetch_top_level_navigation_nodes()
-    print(response)
-    assert(isinstance(response, pd.DataFrame))
-    market_id = response['id'].iloc[0]
+    print(response) # dict with nodes and markets
+    assert(isinstance(response, dict))
+    market_id = response['nodes']['id'].iloc[0]
+
 
     response = ig_service.fetch_client_sentiment_by_instrument(market_id)
     print(response)
@@ -50,3 +51,17 @@ def test_ig_service():
     response = ig_service.fetch_related_client_sentiment_by_instrument(market_id)
     print(response)
     assert(isinstance(response, pd.DataFrame))
+
+    node = market_id #?
+    response = ig_service.fetch_sub_nodes_by_node(node)
+    print(response)
+
+    #epic = ''
+    #response = ig_service.fetch_market_by_epic(epic)
+
+    response = ig_service.fetch_all_watchlists()
+    print(response)
+    watchlist_id = response['id'].iloc[0]
+
+    response = ig_service.fetch_watchlist_markets(watchlist_id)
+    print(response)

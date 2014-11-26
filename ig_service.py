@@ -281,13 +281,17 @@ class IGService:
         response = requests.get(self.BASE_URL + '/marketnavigation', headers=self.LOGGED_IN_HEADERS)
         data = self.parse_response(response.text)
         if self.return_dataframe:
-            data = pd.DataFrame(data['nodes'])
+            data['markets'] = pd.DataFrame(data['markets'])
+            data['nodes'] = pd.DataFrame(data['nodes'])
         return(data)
 
     def fetch_sub_nodes_by_node(self, node):
         """Returns all sub-nodes of the given node in the market navigation hierarchy"""
         response = requests.get(self.BASE_URL + '/marketnavigation/%s' % node, headers=self.LOGGED_IN_HEADERS)
         data = self.parse_response(response.text)
+        if self.return_dataframe:
+            data['markets'] = pd.DataFrame(data['markets'])
+            data['nodes'] = pd.DataFrame(data['nodes'])
         return(data)
 
     def fetch_market_by_epic(self, epic):
@@ -318,6 +322,8 @@ class IGService:
         """Returns all watchlists belonging to the active account"""
         response = requests.get(self.BASE_URL + '/watchlists', headers=self.LOGGED_IN_HEADERS)
         data = self.parse_response(response.text)
+        if self.return_dataframe:
+            data = pd.DataFrame(data['watchlists'])
         return(data)
 
     def create_watchlist(self, name, epics):
@@ -341,6 +347,8 @@ class IGService:
         """Returns the given watchlist's markets"""
         response = requests.get(self.BASE_URL + '/watchlists/%s' % watchlist_id, headers=self.LOGGED_IN_HEADERS)
         data = self.parse_response(response.text)
+        if self.return_dataframe:
+            data = pd.DataFrame(data['markets'])
         return(data)
 
 
