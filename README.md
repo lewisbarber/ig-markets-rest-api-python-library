@@ -30,7 +30,7 @@ open_positions = ig_service.fetch_open_positions()
 print(open_positions)
 ```
 
-with #ig_service_config.py#
+with `ig_service_config.py`
 
 ```python
 username = "YOUR_USERNAME"
